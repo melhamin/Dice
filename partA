@@ -1,0 +1,28 @@
+=============== Function Definition and Function Call ===============
+
+<identifier> ::= [a-zA-Z_$]
+
+<function definition> ::= <function header> <function body>
+<function header> ::= <return type> <function signature>
+<return type> ::= void 
+                | <type> 
+
+<type> ::= <primitive type> 
+         | <reference type>
+                     
+<primitive type> ::= char
+                   | short
+                   | int
+                   | long
+                   | float
+                   | double     
+
+<reference type> ::= <class name>
+                   | <array type> 
+
+<class name> ::= <identifier>
+<array type> ::= <type> []                     
+
+<function signature> ::= <identifier> (<parameter list>?)    
+<parameter list> ::= <parameter> 
+                   | <parameter list>, <parameter>                                            
