@@ -1,0 +1,40 @@
+<declaration_statement> ::= var <identifier>
+			              | var <identifier> <assignment_operator> <expression>\
+<identifier> ::= <char>+(<char>|<digit>+)
+
+<expression>  ::= <arithmetics> | <relationals> | <booleans>
+<aritmetihcs> ::= <arithmetics> + <arithmetics>
+			    | <arithmetics> - <arithmetics>
+			    | <term>
+
+<loops> ::= <while> | <for>
+<while> ::= while (<conditional_statement>) <statement>
+<for> ::= for(<expression>; <conditional_statement>; <expression>) <statement>
+<conditional_statement> ::= if (<expression>) <statement>
+					      | if (<expression>) <statement> else <statement>                 
+<term> ::= <term> * <term>
+	     | <term> / <term>
+	     | <number>
+
+
+
+<number> ::= <const> 
+<const> ::= <id>
+
+<alphabet>            ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q |
+                          r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+<number>              ::= <digits>                            
+<digits>              ::= <digit> 
+                        | <digits> <digit>
+<digit>               ::= 0 | non_zero_digit    
+<alphanumeric>        ::= <alphabet> <alphanumeric> 
+                        | <digit> <alphanumeric>
+<word>                ::= {<digit>|<alphabet>}                                              
+                        | <word> {<digit>|<alphabet>}  
+<variable>            ::= var                        
+
+
+<line_comment>        ::= //word
+                      ::= //<line_comment> <word>
+<block_comment>       ::= /* word */
+                      ::= /* <block_comment> <word> */ 

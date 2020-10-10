@@ -1,0 +1,32 @@
+## Non-terminals
+<declaration_statement> ::= var <identifier>
+			  | var <identifier> <assignment_operator> <expression>
+
+<assignment_statement> ::= <identifier> <assignment_operator> <identifier>
+			 | <identifier> <assignment_operator> <expression>
+
+## Terminals
+<assignment_operator> ::= =
+
+<identifier> ::= <char>+(<char>|<digit>+)
+
+<expression> ::= [<char>|<digit>]+
+
+<digit> ::= 0
+	   | 1
+	   | 2
+	   | 3
+	   | 4
+	   | 5
+	   | 6
+	   | 7
+	   | 8
+	   | 9
+
+<char> ::= a
+	 | b
+	 | c
+	 | d
+	 | e
+	 | f
+	 | g...

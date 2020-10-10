@@ -1,0 +1,42 @@
+<expression> ::= <arithmetics> | <relationals> | <booleans>
+
+<aritmetihcs> ::= <arithmetics> + <arithmetics>
+			    | <arithmetics> - <arithmetics>
+			    | <term>
+<term> ::= <term> * <term>
+	     | <term> / <term>
+	     | <number>
+
+<number> ::= <const> 
+<const> ::= <id>
+// CONST SHOULD BE IDENTIFIED !!!!!!!!!!!
+
+
+<relationals> ::= <relationals> < <relationals>
+			| <relationals> > <relationals>
+			| <relationals> >= <relationals>
+			| <relationals> <= <relationals>
+			| <relationals> && <relationals>
+			| <relationals> || <relationals>
+			| <relationals> == <relationals>
+			| <relationals> != <relationals>
+// relationals to be countinued !!!!!
+
+<booleans> ::= <booleans> 
+
+
+---------*******-----------
+
+<loops> ::= <while> | <for>
+
+<while> ::= while (<conditional_statement>) <statement>
+
+<for> ::= for(<expression>; <conditional_statement>; <expression>) <statement>
+
+---------*******-----------
+
+<conditional_statement> ::= if (<expression>) <statement>
+					| if (<expression>) <statement> else <statement> 
+
+
+// STATEMENT SHOULD BE IDENTIFIED !!!!!!!!!!!!!!!!
