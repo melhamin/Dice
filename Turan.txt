@@ -1,29 +1,17 @@
-<expression> ::= <arithmetics> | <relationals> | <booleans>
+<expression> ::= <assignment> | <relationals>
 
-<aritmetihcs> ::= <arithmetics> + <arithmetics>
-			    | <arithmetics> - <arithmetics>
-			    | <term>
-<term> ::= <term> * <term>
-	     | <term> / <term>
-	     | <number>
+<assignment> ::= <identifier> = <identifier> <mat_operations> <identifier>
+	       	| <identifier> = <identifier>
+	       	| <identifier> = <function_call>
+	       	| <type> <identifier>
 
-<number> ::= <const> 
-<const> ::= <id>
-// CONST SHOULD BE IDENTIFIED !!!!!!!!!!!
+<relationals> ::= <identifier> <rel_operations> <identifier>
 
+<rel_operations> ::= > | >= | <= | < | && | || | == | !=
 
-<relationals> ::= <relationals> < <relationals>
-			| <relationals> > <relationals>
-			| <relationals> >= <relationals>
-			| <relationals> <= <relationals>
-			| <relationals> && <relationals>
-			| <relationals> || <relationals>
-			| <relationals> == <relationals>
-			| <relationals> != <relationals>
-// relationals to be countinued !!!!!
+<mat_operations> ::= + | - | / | * | %
 
-<booleans> ::= <booleans> 
-
+<identifier> ::= <alphanumeric> // IT CAN BE WORD ALSO 
 
 ---------*******-----------
 
@@ -39,4 +27,3 @@
 					| if (<expression>) <statement> else <statement> 
 
 
-// STATEMENT SHOULD BE IDENTIFIED !!!!!!!!!!!!!!!!

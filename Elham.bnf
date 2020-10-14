@@ -1,0 +1,108 @@
+<program>             ::= <begin> <statements> <end>
+<statements>          ::= <>
+
+=============== Function Declaration and Function Call ===============
+
+<function_definition> ::= <function_header> <function_body>
+<function_header>     ::= <return_type> <function_signature>
+<return_type>         ::= void 
+                        | <type>               
+<function_signature>  ::= <identifier> <LP><parameter_list> | <empty><RP>    
+<parameter_list>      ::= <parameter> 
+                        | <parameter_list>, <parameter>     
+<parameter>           ::= <type> <variable_id>
+<variable_id>         ::= <identifier> 
+                        | <variable_id> []                           
+<function_body>       ::= <block> | <semicolor>
+<block>               ::= <LCB> <block_statments> | <empty> <RCB>
+<block_statments>     ::= <statements>  
+                        | <empty> 
+<function_call>       ::= <function_name> <LP> <argument_list> | <empty> <RP><semicolon>
+<function_name>       ::= <identifier>
+
+============== Input and Output Statement ================                     
+<input_statement>     ::= input<LP> <statements> | <empty> <RP>
+<output_statement>    ::= print<LP> <statements> | <empty> <RP>
+
+
+============== Alphabet and Digits =================
+
+<identifier>          ::= <identifier> <alphabet> 
+                        | <identifier> <number>
+                        | <alphabet>
+<alphabet>            ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q |
+                          r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | 
+                          I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+<number>              ::= <digits>                            
+<digits>              ::= <digit> 
+                        | <digits> <digit>
+<digit>               ::= 0 | <non_zero_digit>
+<non_zero_digit>      ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9      
+<alphanumeric>        ::= <alphabet> <alphanumeric> 
+                        | <digit> <alphanumeric>
+<sentence>            ::= <sentence><word> 
+                        | <sentence><digit>
+                        | <word> 
+<word>                ::= <alphabet>|<digit>                                            
+                        | <word> <alphabet>|<digit>                        
+
+=================== Types ===================
+
+<type>                ::= <primitive_type> 
+                        | <reference_type>                    
+<primitive_type>      ::= string
+                        | char                        
+                        | int                        
+                        | float
+                        | double 
+                        | bool                            
+<string>              ::= <string_ident><sentence><string_ident>
+<char>                ::= <char_ident> <alphabet> <char_ident>
+                        | <char_ident> <digit> <char_ident>
+<bool>                ::= <true> | <false>                        
+<int>                 ::= <int> <digit>
+                        | <digit>
+<float>               ::= <int>?.<int>
+                        | <int>?.<digit>
+                        | <digit>                        
+<double>               ::= <int>?.<int>
+                        | <int>?.<digit>
+                        | <digit>                        
+<reference_type>      ::= <class_name>
+                        | <array_type>
+<class_name>          ::= <identifier>                               
+<array_type>          ::= <type> []                        
+
+
+============= Comments ==============
+<line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
+                      ::= <line_comment_ident> <sentence>
+<block_comment>       ::= <block_comment_start> word <block_comment_end>
+                      ::= <block_comment_start> <block_comment> <word> <block_comment_end>                   
+
+================== Symbols =================
+<line_comment_ident>  ::= //
+<block_comment_start> ::= /* 
+<block_comment_end>   ::= */
+<symbol>              ::= <LP> | <RP> | <semicolon> | <underscore> | <equal> | <dot> | <space>
+                        | <LCB> | <RCB> | <string_ident> | <char_ident>
+<LP>                  ::= (
+<RP>                  ::= )
+<LCB>                 ::= {
+<RCB>                 ::= }
+<semicolon>           ::= ;                        
+<equal>               ::= =                        
+<dot>                 ::= .                      
+<space>               ::= " "
+<string_ident>        ::= "
+<char_ident>          ::= '
+'"
+<or>                  ::= ||
+<and>                 ::= &&
+<not>                 ::= !
+<comparison>          ::= ==
+
+
+
+
+
