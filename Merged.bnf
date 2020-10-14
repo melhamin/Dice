@@ -1,43 +1,57 @@
 # Non-Terminals
-<Program> ::= <statements>
+<Program> ::= <statement_List>
 
-<statements> ::= <statement>
-               | <statements> ';' <statement>
+<statement_List> ::= <statement>
+                   | <statement_List> ; <statement>
 
 <statement> ::= <declaration_statement> 
-              | <assignment>
-              | <>
+              | <assignment_statement>
+              | <function_call>
+              | <conditional_statement>
+              | <loop_statement>
 
-<declaration_statement> ::= 'var' <identifier>
-                          | 'var' <identifier> <assignment_operator> <identifier>
-			              | 'var' <identifier> <assignment_operator> <expression>
-                          
-<assignment> ::= <identifier> <assignment_operator> <identifier>
-             ::= <identifier> <assignment_operator> <expression>
+<declaration_statement> ::= var <identifier>
+                          | var <identifier> <assignment_operator> <identifier>
+			              | var <identifier> <assignment_operator> <expression>
+  
+<assignment_statement> ::= <identifier> <assignment_operator> <identifier>
+                         | <identifier> <assignment_operator> <expression>
 
-<expression>  ::= <arithmetics> | <relationals> | <booleans>
+<expression>  ::= <arithmetic> | <relational>
 
-<aritmetihcs> ::= <arithmetics> + <arithmetics>
-			    | <arithmetics> - <arithmetics>
-			    | <term>
+<arithmetic> ::= <arithmetic> + <mult_div>
+               | <arithmetic> - <mult_div>
+               | <mult_div>
+
+<mult_div> ::= <mult_div> * <in_paranthesis>
+             | <mult_div> / <in_paranthesis>
+             | <mult_div> % <in_paranthesis>
+             | <in_paranthesis>
+
+<in_paranthesis> ::= ( <arithmetic> )
+                   | <number>
+                   | <identifier>
+
+<relational> ::= <arithmetic> < <arithmetic>
+               | <arithmetic> <= <arithmetic>
+               | <arithmetic> > <arithmetic>
+               | <arithmetic> >= <arithmetic>
+               | <arithmetic> == <arithmetic>
+               | <arithmetic> != <arithmetic>
 
 <loops> ::= <while> | <for>
 
-<while> ::= while (<conditional_statement>) <statement>
+<while> ::= while ( <conditional_statement> ) <statement>
 
-<for> ::= for(<expression>; <conditional_statement>; <expression>) <statement>
+<for> ::= for ( <expression> ; <conditional_statement> ; <expression> ) <statement>
 
-<conditional_statement> ::= if (<expression>) <statement>
-					      | if (<expression>) <statement> else <statement>                 
-
-<term> ::= <term> * <term>
-	     | <term> / <term>
-	     | <number>
+<conditional_statement> ::= if ( <expression> ) <statement>
+					      | if ( <expression> ) <statement> else <statement>                 
 
 ## Terminals
-<identifier> ::= <char>+(<char>|<digit>+)
+<identifier> ::= <char>+(<char>|<digit>)*
 
-<number> ::= <const> 
+<number> ::= <const>
 
 <const> ::= <id>
 

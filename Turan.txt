@@ -1,6 +1,6 @@
-<expression> ::= <assignment> | <relationals>
+<expression> ::= <arithmatic> | <relationals>
 
-<assignment> ::= <identifier> = <identifier> <mat_operations> <identifier>
+<arithmatic> ::= <identifier> = <identifier> <mat_operations> <identifier>
 	       	| <identifier> = <identifier>
 	       	| <identifier> = <function_call>
 	       	| <type> <identifier>
