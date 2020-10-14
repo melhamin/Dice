@@ -11,7 +11,7 @@
 
 <mat_operations> ::= + | - | / | * | %
 
-<identifier> ::= <alphanumeric> // 
+<identifier> ::= <alphanumeric> // IT CAN BE WORD ALSO 
 
 ---------*******-----------
 
