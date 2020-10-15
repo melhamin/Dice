@@ -48,13 +48,10 @@
 
 =============== Function Declaration and Function Call ===============
 <function_definition> ::= <function_header> <function_body>
-<function_header>     ::= <return_type> <function_signature>
-<return_type>         ::= void
-                        | <type>
+<function_header>     ::= 'function' <function_signature>
 <function_signature>  ::= <function_name> <LP><parameter_list> | <empty><RP>    
-<parameter_list>      ::= <parameter_list> <comma> <parameter> 
-                        | <parameter>     
-<parameter>           ::= <type> <identifier>
+<parameter_list>      ::= <parameter_list> <comma> <identifier> 
+                        | <identifier>     
 <function_body>       ::= <block> | <semicolon>
 <block>               ::= <LCB> <statement_List> | <empty> <RCB>
 <function_call>       ::= <function_name> <LP> <argument_list> | <empty> <RP>
@@ -76,21 +73,7 @@
                       ::= <line_comment_ident> <sentence>
 <block_comment>       ::= <block_comment_start> word <block_comment_end>
                       ::= <block_comment_start> <block_comment> <word> <block_comment_end>    
-
-=================== Types ===================
-<type>      ::= string
-            | int
-            | double
-            | bool
-
-<string>              ::= <string_ident><sentence><string_ident>
-<bool>                ::= <true> | <false>
-<int>                 ::= <int> <digit>
-                        | <digit>
-<double>              ::= <int>?.<int>
-                        | <int>?.<digit>
-                        | <digit>
-
+                      
 ============= numbers and sentences =============
 <number>              ::= <digit> 
                         | <number> <digit>
