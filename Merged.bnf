@@ -141,10 +141,6 @@
 <emergency_stop> ::= emergency_stop<LP><RP>
 //A primitive void function that keeps Tello stable in the air
 <hover> ::= hover<LP><RP>
-
-/******* I RECOMMEND FLY CURVE TO REMOVE GUYS, IT HAS LOTS OF PRECONDITIONS IN SDK ******* /////-Turan
-<fly_curve> ::= fly_curve<LP><expression><comma><expression><comma><expression><comma><expression><comma><expression><comma><expression><comma><expression><RP>
-
 //A primitive void function that sets speed of Tello to the given value that is given in parantheses
 <set_speed> ::= set_speed<LP><expression><RP>
 //A primitive void function that sets name and password Wifi of Tello
