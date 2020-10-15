@@ -1,4 +1,4 @@
-=========== Program =============
+#=========== Program =============
 <Program> ::= <statement_List>
 <statement_List> ::= <statement>
                    | <statement_List> ; <statement>
@@ -8,7 +8,7 @@
               | <conditional_statement>
               | <loop_statement>
 
-=========== statements ==========
+#=========== statements ==========
 <declaration_statement> ::= <variable> <identifier>
                           | <variable> <identifier> <assignment_operator> <identifier>
 			              | <variable> <identifier> <assignment_operator> <expression>
@@ -19,7 +19,7 @@
 <conditional_statement> ::= if <LP> <expression> <RP> <statement>
 					      | if <LP> <expression> <RP> <statement> else <statement> 
 
-=========== expressions =========
+#=========== expressions =========
 <expression>  ::= <arithmetic> | <relational>
 
 <arithmetic> ::= <arithmetic> <add_op> <mult_div>
@@ -46,7 +46,7 @@
                         | <equal_to>
                         | <not_equal_to>                     
 
-=============== Function Declaration and Function Call ===============
+#=============== Function Declaration and Function Call ===============
 <function_definition> ::= <function_header> <function_body>
 <function_header>     ::= 'function' <function_signature>
 <function_signature>  ::= <function_name> <LP><parameter_list> | <empty><RP>    
@@ -57,24 +57,24 @@
 <function_call>       ::= <function_name> <LP> <argument_list> | <empty> <RP>
 <function_name>       ::= <identifier>
 
-============== Input and Output Statement ================                     
+#============== Input and Output Statement ================                     
 <input_statement>     ::= input<LP> <function_call> | <sentence> | <empty> <RP>  \\ todo
 <output_statement>    ::= print<LP> <function_call> | <expression> | <sentence> | <empty> <RP> \\ todo
 
-============== Loops ===============
+#============== Loops ===============
 <loop_statement> ::= <while> | <for>
 
 <while> ::= while <LP> <conditional_statement> <RP> <statement>
 
 <for> ::= for <LP> <expression> ; <conditional_statement> ; <expression> <RP> <statement>  
 
-============= Comments ==============
+#============= Comments ==============
 <line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
                       ::= <line_comment_ident> <sentence>
 <block_comment>       ::= <block_comment_start> word <block_comment_end>
                       ::= <block_comment_start> <block_comment> <word> <block_comment_end>    
-                      
-============= numbers and sentences =============
+
+#============= numbers and sentences =============
 <number>              ::= <digit> 
                         | <number> <digit>
 
@@ -96,7 +96,41 @@
                         | <digit>
                         | <alphabet>
 
-================== Terminals ====================
+#============== Primitive Functions ==============
+<takeoff> ::= takeoff<LP><RP>
+<land> ::= land<LP><RP>
+<flip_left> ::= flip_left<LP><RP>
+<flip_right> ::= flip_right<LP><RP>
+<flip_front> ::= flip_front<LP><RP>
+<flip_back> ::= flip_back<LP><RP>
+<go> ::= go<LP><expression><comma><expression><comma><expression><comma><expression><RP> // go x y z speed
+<go_up> ::= go_up<LP><expression><RP>
+<go_down> ::= go_down<LP><expression><RP>
+<go_forward> ::= go_forward<LP><expression><RP>
+<go_backword> ::= go_backword<LP><expression><RP>
+<go_left> ::= go_left<LP><expression><RP>
+<go_right> ::= go_right<LP><expression><RP>
+<rotate_x_clockwise> ::= rotate_c<LP><expression><RP>
+<rotate_x_counterclockwise> ::= rotate_cc<LP><expression><RP>
+<video_on> ::= video_on<LP><RP>
+<video_off> ::= video_off<LP><RP>
+<take_pic> ::= take_pic<LP><RP>
+<emergency_stop> ::= emergency_stop<LP><RP>
+<hover> ::= hover<LP><RP>
+<fly_curve> ::= fly_curve<LP><expression><comma><expression><comma><expression><comma><expression><comma><expression><comma><expression><comma><expression><RP>
+<set_speed> ::= set_speed<LP><expression><RP>
+<set_wifi> ::= set_wifi<LP><expression><comma><expression><RP>
+
+<get_altitude> ::= get_altitude<LP><RP>
+<get_temperature> ::= get_temperature<LP><RP>
+<get_speed> ::= get_speed<LP><RP>
+<get_ecceleration> ::= get_ecceleration<LP><RP>
+<get_inclination> ::= get_inclination<LP><RP>
+<get_time> ::= get_time<LP><RP>
+<get_battery> ::= get_battery<LP><RP>
+<connect_to_computer> ::= connect_to_computer<LP><RP>
+
+#================== Terminals ====================
 
 <alphabet>            ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q |
                           r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | 
@@ -123,7 +157,7 @@
 <RCB>                 ::= }
 <semicolon>           ::= ;                        
 <assignment_operator> ::= =                        
-<dot>                 ::= .                      
+<dot>                 ::= .
 <space>               ::= " "
 <string_ident>        ::= "\""
 <char_ident>          ::= "\'"
