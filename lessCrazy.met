@@ -1,0 +1,47 @@
+// Language reserved words
+ALTITUDE (in cm) +-number
+CURRENT_TIME (hr:min:sec) ranges between 00:00:00 - 23:59:59
+TEMPERATURE (in degrees)
+
+// Functions
+TAKEOFF()
+LAND()
+FLIP_LEFT()
+FLIP_RIGHT()
+FLIP_FRONT()
+FLIP_BACK()
+GO_FORWARD(amount (cm))
+GO_BACKWARD(amount (cm))
+TURN_LEFT(amount (degrees))
+TURN_RIGHT(amount (degrees))
+TAKE_PIC()
+WAIT();
+
+// Variable declaration
+let startingTime = 11:45:10;
+let maxAltitude = 100;
+
+// Functions declarations
+increaseAltitude(){
+    ALTITUDE += 10;
+}
+
+reduceAltitude(){
+    ALTITUDE -= 10;
+}
+
+// code
+while (TIME < 11:45:10) : WAIT();
+
+TAKEOFF();
+
+while ALTITUDE != maxAltitude : {
+    increaseAltitude();
+}
+
+if TEMPERATURE == 45 : FLIP_RIGHT();
+else : FLIP_LEFT();
+
+while (TIME < 12:15:10) : WAIT();
+
+LAND();

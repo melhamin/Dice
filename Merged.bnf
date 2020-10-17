@@ -1,0 +1,218 @@
+#=========== Program =============
+// Non-terminal token that shows our program consists of statements.
+<Program> ::= <statement_List>
+// Non-terminal token that shows our statements can be one or more than one. 
+<statement_List> ::= <statement>
+                   | <statement_List> ; <statement>
+// Non-terminal token that shows our statement can be declaration, assignment, function call, condition or loop statement.
+<statement> ::= <declaration_statement> 
+              | <assignment_statement>
+              | <function_call>
+              | <conditional_statement>
+              | <loop_statement>
+              | <builtin_functions>
+
+#=========== statements ==========
+// Non-terminal token that shows how to decleare a variable in 3 different ways.
+<declaration_statement> ::= <variable> <identifier>
+                          | <variable> <identifier> <assignment_operator> <identifier>
+			  | <variable> <identifier> <assignment_operator> <expression>
+//TODO
+<assignment_statement> ::= <identifier> <assignment_operator> <identifier>
+                         | <identifier> <assignment_operator> <expression>
+
+<conditional_statement> ::= if <LP> <expression> <RP> <statement>
+					      | if <LP> <expression> <RP> <statement> else <statement> 
+
+#=========== expressions =========
+<expression>  ::= <arithmetic> | <relational>
+
+<arithmetic> ::= <arithmetic> <add_op> <mult_div>
+               | <arithmetic> <sub_op> <mult_div>
+               | <mult_div>
+
+<mult_div> ::= <mult_div> <mul_op> <in_paranthesis>
+             | <mult_div> <div_op> <in_paranthesis>
+             | <mult_div> <mod_op> <in_paranthesis>
+             | <in_paranthesis>
+
+<in_paranthesis> ::= <LP> <arithmetic> <RP>
+                   | <number>
+                   | <identifier>
+
+<relational> ::= <arithmetic> <relational_operator> <arithmetic>
+
+<relational_operator> ::= <LT>
+                        | <LTE>
+                        | <GT>
+                        | <GTE>
+                        | <and>
+                        | <or>
+                        | <equal_to>
+                        | <not_equal_to>                     
+
+#=============== Function Declaration and Function Call ===============
+<function_definition> ::= <function_header> <function_body>
+<function_header>     ::= 'function' <function_signature>
+<function_signature>  ::= <function_name> <LP><parameter_list> | <empty><RP>    
+<parameter_list>      ::= <parameter_list> <comma> <identifier> 
+                        | <identifier>     
+<function_body>       ::= <block> | <semicolon>
+<block>               ::= <LCB> <statement_List> | <empty> <RCB>
+<function_call>       ::= <function_name> <LP> <argument_list> | <empty> <RP>
+<function_name>       ::= <identifier> 
+                        | <builtin_function_id>
+
+#============== Input and Output Statement ================                     
+<input_statement>     ::= input<LP> <function_call> | <sentence> | <empty> <RP>  \\ todo
+<output_statement>    ::= print<LP> <function_call> | <expression> | <sentence> | <empty> <RP> \\ todo
+
+#============== Loops ===============
+<loop_statement> ::= <while> | <for>
+
+<while> ::= while <LP> <conditional_statement> <RP> <statement>
+
+<for> ::= for <LP> <expression> ; <conditional_statement> ; <expression> <RP> <statement>  
+
+#============= Comments ==============
+<line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
+                      ::= <line_comment_ident> <sentence>
+<block_comment>       ::= <block_comment_start> word <block_comment_end>
+                      ::= <block_comment_start> <block_comment> <word> <block_comment_end>    
+
+#============= numbers and sentences =============
+<number>              ::= <digit> 
+                        | <number> <digit>
+
+<digit>               ::= 0 | <non_zero_digit>    
+
+<sentence>            ::= <sentence><word> 
+                        | <sentence><digit>
+                        | <word> 
+
+<word>                ::= <alphabet>|<digit>                                            
+                        | <word> <alphabet>|<digit>   
+
+<identifier>          ::= <identifier> <alphabet> 
+                        | <identifier> <number>
+                        | <alphabet>
+
+<alphanumeric>        ::= <alphabet> <alphanumeric> 
+                        | <digit> <alphanumeric>
+                        | <digit>
+                        | <alphabet>
+
+#============== Primitive Functions ==============
+<builtin_function_id>     ::= takeoff | <land> | <pr
+//A primitive void function that used for taking off the Tello
+<takeoff> ::= takeoff<LP><RP>
+//A primitive void function that used for landing the Tello
+<land> ::= land<LP><RP>
+//A primitive void function that used for flipping left the Tello
+<flip_left> ::= flip_left<LP><RP>
+//A primitive void function that used for flipping right the Tello
+<flip_right> ::= flip_right<LP><RP>
+//A primitive void function that used for flipping front the Tello
+<flip_front> ::= flip_front<LP><RP>
+//A primitive void function that used for flipping back the Tello
+<flip_back> ::= flip_back<LP><RP>
+//A primitive void function that takes 4 parameter x,y,z coordinates and speed respectively and let the drone fly through coordinate with the given speed 
+<go> ::= go<LP><expression><comma><expression><comma><expression><comma><expression><RP> // go x y z speed
+//A primitive void function that used for increasing the altitude of the Tello according to the value that is given in parentheses and in between 20-500
+<go_up> ::= go_up<LP><expression><RP>
+//A primitive void function that used for decreasing the altitude of the Tello according to the value that is given in parentheses and in between 20-500
+<go_down> ::= go_down<LP><expression><RP>
+//A primitive void function that makes Tello move forward according to the value that is given in parentheses and in between 20-500
+<go_forward> ::= go_forward<LP><expression><RP>
+//A primitive void function that makes Tello move backward according to the value that is given in parentheses in between 20-500
+<go_backward> ::= go_backward<LP><expression><RP>
+//A primitive void function that makes Tello move left according to the value that is given in parentheses in between 20-500
+<go_left> ::= go_left<LP><expression><RP>
+//A primitive void function that makes Tello move right according to the value that is given in parentheses in between 20-500
+<go_right> ::= go_right<LP><expression><RP>
+//A primitive void function that rotates Tello clockwise according to the degree whose value is given in parentheses in between 1-360
+<rotate_x_clockwise> ::= rotate_c<LP><expression><RP>
+//A primitive void function that rotates Tello counter clockwise according to the degree whose value is given in parentheses in between 1-360
+<rotate_x_counterclockwise> ::= rotate_cc<LP><expression><RP>
+//A primitive void function that turns the video on of Tello
+<video_on> ::= video_on<LP><RP>
+//A primitive void function that turns the video off of Tello
+<video_off> ::= video_off<LP><RP>
+//A primitive void function that allows Tello to take picture
+<take_pic> ::= take_pic<LP><RP>
+//A primitive void function that stops motor of the Tello immediately
+<emergency_stop> ::= emergency_stop<LP><RP>
+//A primitive void function that keeps Tello stable in the air
+<hover> ::= hover<LP><RP>
+//A primitive void function that sets speed of Tello to the given value that is given in parantheses
+<set_speed> ::= set_speed<LP><expression><RP>
+//A primitive void function that sets name and password Wifi of Tello
+<set_wifi> ::= set_wifi<LP><expression><comma><expression><RP>
+
+
+
+
+//A primitive function that returns altitude value of Tello
+<get_altitude> ::= get_altitude<LP><RP>
+//A primitive function that returns temperature value of Tello
+<get_temperature> ::= get_temperature<LP><RP>
+//A primitive function that returns speed value of Tello
+<get_speed> ::= get_speed<LP><RP>
+//A primitive function that returns acceleration value of Tello
+<get_acceleration> ::= get_ecceleration<LP><RP>
+//A primitive function that returns inclination degree of Tello
+<get_inclination> ::= get_inclination<LP><RP>
+//A primitive function that returns current time
+<get_time> ::= get_time<LP><RP>
+//A primitive function that returns battery situation in percentage value of Tello
+<get_battery> ::= get_battery<LP><RP>
+
+/******* I COULDNT FIND ANY DESCRIPTION FOR IT GUYS ******* /////-Turan
+<connect> ::= connect<LP><RP>
+
+#================== Terminals ====================
+
+<alphabet>            ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q |
+                          r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | 
+                          I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z  
+<non_zero_digit>      ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9  
+<variable>            ::= var
+<line_comment_ident>  ::= //
+<block_comment_start> ::= /* 
+<block_comment_end>   ::= */
+<symbol>              ::= <LP> 
+                        | <RP> 
+                        | <semicolon> 
+                        | <underscore> 
+                        | <assignment_operator> 
+                        | <dot> 
+                        | <space>
+                        | <LCB> 
+                        | <RCB> 
+                        | <string_ident> 
+                        | <char_ident>
+<LP>                  ::= (
+<RP>                  ::= )
+<LCB>                 ::= {
+<RCB>                 ::= }
+<semicolon>           ::= ;                        
+<assignment_operator> ::= =                        
+<dot>                 ::= .
+<space>               ::= " "
+<string_ident>        ::= "\""
+<char_ident>          ::= "\'"
+<or>                  ::= ||
+<and>                 ::= &&
+<not>                 ::= !
+<equal_to>            ::= ==
+<not_equal_to>        ::= !=
+<LT>                  ::= <
+<GT>                  ::= >
+<LTE>                 ::= <=
+<GTE>                 ::= >=
+<mul_op>              ::= * 
+<div_op>              ::= /
+<add_op>              ::= +
+<sub_op>              ::= -
+<mod_op>              ::= %
+<comma>               ::= ,

@@ -1,0 +1,33 @@
+
+// Variable declaration
+var startingTime = 11;
+var maxAltitude = 100;
+
+// Functions declarations
+function increaseAltitude(){
+    var currentAlt = get_altitude();
+    go_up(currentAlt + 1);
+}
+
+connect();
+take_off();
+
+/*
+Some comment here 
+this is another line
+yet another line
+
+*/
+while ( get_altitude() != maxAltitude){
+    increaseAltitude();
+}
+
+if (get_temperature() == 40 ) {
+    flip_right();
+} else flip_left();
+
+while (get_time< 12) {
+    hover();
+}
+
+land();

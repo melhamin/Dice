@@ -1,0 +1,44 @@
+// Language reserved words
+ALTITUDE (in cm)
+CURRENT_TIME (hr:min:sec)
+TEMPERATURE (in degrees)
+
+// Functions
+TAKEOFF()
+LAND()
+FLIP_LEFT()
+FLIP_RIGHT()
+FLIP_FRONT()
+FLIP_BACK()
+GO_FORWARD(amount (cm))
+GO_BACKWARD(amount (cm))
+TURN_LEFT(amount (degrees))
+TURN_RIGHT(amount (degrees))
+TAKE_PIC()
+
+// Variable declaration
+store 11:45:10 in startingTime;
+store 100      in maxAltitude;
+
+// code
+when TIME = startingTime : TAKEOFF();
+
+while ALTITUDE != maxAltitude : {
+    increaseAltitude();
+}
+
+when ALTITUDE = maxAltitude : {
+    if TEMPERATURE = 45 : FLIP_RIGHT();
+    else FLIP_LEFT();
+}
+
+when TIME = 12:15:10 : LAND();
+
+// Functions
+increaseAltitude(){
+    ALTITUDE += 10;
+}
+
+reduceAltitude(){
+    ALTITUDE -= 10;
+}
