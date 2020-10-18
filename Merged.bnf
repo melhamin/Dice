@@ -70,9 +70,9 @@
 #============== Loops ===============
 <loop_statement> ::= <while> | <for>
 
-<while> ::= while <LP> <conditional_statement> <RP> <statement>
+<while> ::= while <LP> <conditional_statement> <RP> <LCB> <statement_List> <RCB>
 
-<for> ::= for <LP> <assignment_statement> ; <conditional_statement> ; <assignment_statement> <RP> <statement>  
+<for> ::= for <LP> <assignment_statement> ; <conditional_statement> ; <assignment_statement> <RP> <LCB> <statement_List> <RCB>
 
 #============= Comments ==============
 <line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
