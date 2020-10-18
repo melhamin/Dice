@@ -1,10 +1,9 @@
 ******************************************          TEST 1
 // Variable declaration
-var startingTime = 11;
 var maxAltitude = 100;
 
 // Functions declarations
-function increaseAltitude(){
+function increaseAltitudeWithAcceleration(){
     var currentAlt = get_altitude();
     go_up(currentAlt + 1);
 }
@@ -19,14 +18,14 @@ yet another line
 
 */
 while ( get_altitude() != maxAltitude){
-    increaseAltitude();
+    increaseAltitudeWithAcceleration();
 }
 
 if (get_temperature() == 40 ) {
     flip_right();
 } else flip_left();
 
-while (get_time< 12) {
+while (get_time() < 12) {
     hover();
 }
 
@@ -78,7 +77,6 @@ if( get_battery() <= 10 )
 }
 
 ******************************************          TEST 3
-
 var temperature = get_temperature();
 var totalDistance = 200;
 var speed = 40;
@@ -115,5 +113,3 @@ for( var distance = 0; distance != totalDistance; distance = distance + 1 )
 }
 
 land();
-
-	
