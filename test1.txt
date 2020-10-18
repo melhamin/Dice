@@ -1,4 +1,4 @@
-
+******************************************          TEST 1
 // Variable declaration
 var startingTime = 11;
 var maxAltitude = 100;
@@ -31,3 +31,51 @@ while (get_time< 12) {
 }
 
 land();
+
+******************************************          TEST 2
+
+// Test Program 2 Block Comment
+
+var altitude = get_altitude();
+var currentTime = get_time();
+var password = 1111;
+
+print ( Welcome to the smart drone TELLO's world ! );
+print ( Tello will take the photos and record videos for you, just go up and wait for Tello to reach 100 m);
+
+takeoff();
+
+/*
+If Tello Reach 100 m
+go downs until reaching 10 m and records 
+When it reached 10 meters altitude then it hovers
+If current time acceed 100 seconds it takes a picture of the view.
+*/
+
+if( altitude > 100 ) {
+	video_on();
+	for ( var counter = altitude ; counter  > 10; counter = counter - 1){
+		go_down ( 20 ); 
+	}
+} 
+else
+{
+	if( currentTime > 100) {
+		video_off();
+		hover();
+	}
+	else
+	{
+		take_pic();
+		hover();
+	}
+}
+
+// If battery reaches below 10 percentage Tello is landing.
+if( get_battery() <= 10 )
+{
+	land();
+}
+
+
+	
