@@ -72,7 +72,7 @@
 
 <while> ::= while <LP> <conditional_statement> <RP> <statement>
 
-<for> ::= for <LP> <assignment_statement> ; <conditional_statement> ; <expression> <RP> <statement>  
+<for> ::= for <LP> <assignment_statement> ; <conditional_statement> ; <assignment_statement> <RP> <statement>  
 
 #============= Comments ==============
 <line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
