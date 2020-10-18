@@ -77,5 +77,43 @@ if( get_battery() <= 10 )
 	land();
 }
 
+******************************************          TEST 3
+
+var temperature = get_temperature();
+var totalDistance = 200;
+var speed = 40;
+
+connect();
+takeoff();
+
+for( var distance = 0; distance != totalDistance; distance = distance + 1 ) 
+{
+	if( distance < 50){
+		flip_left();
+	}else{
+		if( distance < 100){
+			flip_front();
+		}else{
+			if( distance < 150){
+				flip_back();
+			}else{
+				flip_right();
+			}	
+		}
+	}
+	go_forward( speed);
+	
+	if( get_acceleration() < 5){
+		speed = speed + 1;
+	}
+	
+	// For emergency temperature issues
+	if( temperature > 80 ){
+		land();
+		emergency_stop();
+	}
+}
+
+land();
 
 	
