@@ -1,3 +1,6 @@
 work/*.c
 work/*.exe
-wordk/out
+work/*.out
+work/*.class
+work/*.cpp
+work/*.java

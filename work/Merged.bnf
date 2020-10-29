@@ -10,7 +10,7 @@
               | <function_call>
               | <conditional_statement>
               | <loop_statement>
-              | <builtin_functions>
+              | <builtin_functions>              
 
 #=========== statements ==========
 // Non-terminal token that shows how to decleare a variable in 3 different ways.
@@ -20,14 +20,15 @@
 //TODO
 <assignment_statement> ::= <identifier> <assignment_operator> <identifier>
                          | <identifier> <assignment_operator> <expression>
+                         | <identifier> <assignment_operator> <function_call>
 
-<conditional_statement> ::= if <LP> <expression> <RP> <statement>
-					      | if <LP> <expression> <RP> <statement> else <statement> 
+<conditional_statement> ::= if <LP> <expression> <RP> <LCB> <statement_List> <RCB>
+					      | if <LP> <expression> <RP> <LCB> <statement_list> <LCB> else <LCB> <statement_list> <RCB>
 
 #=========== expressions =========
-<expression>  ::= <arithmetic> | <relational>
+<expression>  ::= <arithmetic> | <relational> | <not_expression> 
 
-<arithmetic> ::= <arithmetic> <add_op> <mult_div>
+<arithmetic> ::= <arithmetic> <add_op> <mult_div>   
                | <arithmetic> <sub_op> <mult_div>
                | <mult_div>
 
@@ -39,8 +40,9 @@
 <in_paranthesis> ::= <LP> <arithmetic> <RP>
                    | <number>
                    | <identifier>
+                   | <function_call>
 
-<relational> ::= <arithmetic> <relational_operator> <arithmetic>
+<relational> ::= <in_paranthesis> <relational_operator> <in_paranthesis>
 
 <relational_operator> ::= <LT>
                         | <LTE>
@@ -49,31 +51,39 @@
                         | <and>
                         | <or>
                         | <equal_to>
-                        | <not_equal_to>                     
+                        | <not_equal_to>                                             
+
+<not_expression> ::= ! <in_paranthesis>
+                   | ! <LP> <relational> <RP>
+                   | ! <function_call>
 
 #=============== Function Declaration and Function Call ===============
 <function_definition> ::= <function_header> <function_body>
 <function_header>     ::= 'function' <function_signature>
-<function_signature>  ::= <function_name> <LP><parameter_list> | <empty><RP>    
+<function_signature>  ::= <function_name> <LP><parameter_list><RP>    
+                        | <function_name> <LP><RP>    
 <parameter_list>      ::= <parameter_list> <comma> <identifier> 
                         | <identifier>     
 <function_body>       ::= <block> | <semicolon>
-<block>               ::= <LCB> <statement_List> | <empty> <RCB>
-<function_call>       ::= <function_name> <LP> <argument_list> | <empty> <RP>
+<block>               ::= <LCB> <statement_List> <RCB>
+                        | <LCB> <RCB>
+<function_call>       ::= <function_name> <LP> <argument_list> <RP>
+                        | <function_name> <LP><RP>    
 <function_name>       ::= <identifier> 
                         | <builtin_function_id>
 
 #============== Input and Output Statement ================                     
-<input_statement>     ::= input<LP> <function_call> | <sentence> | <empty> <RP>  \\ todo
-<output_statement>    ::= print<LP> <function_call> | <expression> | <sentence> | <empty> <RP> \\ todo
-
+<input_statement>     ::= input >> <identifier>
+<output_statement>    ::= output << <expression>
 #============== Loops ===============
 <loop_statement> ::= <while> | <for>
 
-<while> ::= while <LP> <conditional_statement> <RP> <LCB> <statement_List> <RCB>
+<while> ::= while <LP> <expression> <RP> <LCB> <statement_List> <RCB>
+          | while <LP> <function_call> > 6 <RP> <LCB> <RCB>
+          | while <LP> <expression> <RP> <LCB> <RCB>
 
-<for> ::= for <LP> <assignment_statement> ; <conditional_statement> ; <assignment_statement> <RP> <LCB> <statement_List> <RCB>
-
+<for> ::= for <LP> <assignment_statement> ; <expression> ; <assignment_statement> <RP> <LCB> <statement_List> <RCB>
+        | for <LP> <assignment_statement> ; <expression> ; <assignment_statement> <RP> <LCB><RCB>
 #============= Comments ==============
 <line_comment>        ::= <line_comment_ident> <line_comment> <sentence>
                       ::= <line_comment_ident> <sentence>
