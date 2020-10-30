@@ -4,188 +4,122 @@ int lineno;
 %}
 
 
-%token INTEGER FLOAT FOR IF WHILE ELSE CONNECT
-%token SEND INT_TYPE BOOL_TYPE STR_TYPE WHEN SEMICOLON
-%token CONST PRINT RETURN FLT_TYPE AND OR RECEIVE TIMESTAMP END_OF_FILE
-%token STRING COMMENT SWITCH BUILTIN_FUNC PLUS MINUS
-%token DIV MUL EQUALS IDENTIFIER LB RB LP RP EQ_CMP BOOLEAN
-%token GTEQ_CMP NEQ_CMP LTEQ_CMP LT_CMP GT_CMP URL NL COMMA SRB SLB VOID
-
+%token NUMBER VARIABLE IF LP RP LB RB SEMICLN SINGLE_LINE_COMMENT MULTILINE_COMMENT 
+%token ASGNMNT_OP DOT STRING_IDNT CHAR_IDNT OR_OP AND_OP NOT_OP EQUAL_OP NOT_EQUAL_OP
+%token LESS_T_OP GREATER_T_OP LT_OR_EQUAL_OP GT_OR_EQUAL_OP MUL_OP DIV_OP
+%token ADD_OP SUB_OP MOD_OP COMMA INPUT_CALL OUTPUT_CALL WHILE_LOOP FOR_LOOP
+%token FUNCTION IDENTIFIER ELSE IN_OP OUT_OP
 
 %start program
 
-%right EQUALS
+%right EQUALS  // TODO  
 
-%left GT_CMP LT_CMP NEQ_CMP LTEQ_CMP GTEQ_CMP
+%left GT_CMP LT_CMP NEQ_CMP LTEQ_CMP GTEQ_CMP   // TODO
 
-%left PLUS MINUS
-%left MUL DIV
-%nonassoc IF
-%nonassoc ELSE
+%left PLUS MINUS   // TODO
+
+%left MUL DIV    // TODO
+
+%nonassoc IF     // TODO
+
+%nonassoc ELSE   // TODO
+
 %%
-program: stmt_list eof
+program: statement_List
 ;
-stmt_list:
-/* empty */
-| stmt_list stmt
+statement_List:
+statement
+| statement_List SEMICLN statement
 ;
-stmt: NL
-| expr
-| func_call NL
-| if_stmt NL
-| loop_stmt NL
-| print NL
-| cmnt NL
-| func_declr NL
-| return NL
-| switch NL
-| url NL
+statement: declaration_statement
+| assignment_statement
+| function_call
+| conditional_statement
+| loop_statement
+| builtin_functions
 ;
-eof: END_OF_FILE
-{printf("Valid Program! End of File! Exiting...\n"); return 0;}
+declaration_statement: VARIABLE IDENTIFIER
+| VARIABLE IDENTIFIER ASGNMNT_OP IDENTIFIER
+| VARIABLE IDENTIFIER ASGNMNT_OP expression
 ;
-expr:
- declr NL
-| asnmt NL
+assignment_statement: IDENTIFIER ASGNMNT_OP IDENTIFIER
+| IDENTIFIER ASGNMNT_OP expression
+| IDENTIFIER ASGNMNT_OP function_call
 ;
-declr:
- INT_TYPE IDENTIFIER
-| FLT_TYPE IDENTIFIER
-| BOOL_TYPE IDENTIFIER
-| STR_TYPE IDENTIFIER
-| INT_TYPE IDENTIFIER EQUALS integer
-| INT_TYPE IDENTIFIER EQUALS BUILTIN_FUNC
-| FLT_TYPE IDENTIFIER EQUALS float
-| BOOL_TYPE IDENTIFIER EQUALS BOOLEAN
-| STR_TYPE IDENTIFIER EQUALS STRING
-| CONST INT_TYPE IDENTIFIER EQUALS INTEGER
-| CONST FLT_TYPE IDENTIFIER EQUALS FLOAT
-| CONST BOOL_TYPE IDENTIFIER EQUALS BOOLEAN
-| CONST STR_TYPE IDENTIFIER EQUALS STRING
+conditional_statement : IF LP expression RP LB statement_List RB
+| IF LP expression RP LB statement_list LCB ELSE LB statement_list RB
 ;
-integer:INTEGER
-| MINUS INTEGER
+expression  : arithmetic 
+| relational 
+| not_expression 
 ;
-float: FLOAT
-| MINUS FLOAT
+arithmetic : arithmetic ADD_OP mult_div   
+| arithmetic SUB_OP mult_div
+| mult_div
 ;
-asnmt:
-  IDENTIFIER EQUALS operate
-| IDENTIFIER EQUALS func_call
-| IDENTIFIER EQUALS real WHEN timestamp
-| IDENTIFIER EQUALS BUILTIN_FUNC
-| IDENTIFIER EQUALS BOOLEAN
-| IDENTIFIER EQUALS STRING
-| IDENTIFIER EQUALS URL
+mult_div : mult_div MUL_OP in_paranthesis
+| mult_div DIV_OP in_paranthesis
+| mult_div MOD_OP in_paranthesis
+| in_paranthesis
 ;
-operate:
- operate plus_minus mul_div
-| mul_div
-;
-func_call:
-IDENTIFIER LP common_list RP
-;
-common_list:
-/*empty*/
-| commons
-| common_list COMMA commons
-;
-commons:
-IDENTIFIER
-| INTEGER
-| FLOAT
-| STRING
-| BOOLEAN
-;
-real: INTEGER
-| FLOAT
-;
-timestamp:
-  real 
-| TIMESTAMP
-;
-plus_minus:
-  PLUS
-| MINUS
-;
-mul_div:
- expression
-| mul_div MUL expression
-| mul_div DIV expression
-;
-expression:
- INTEGER
+in_paranthesis : LP arithmetic RP
+| NUMBER
 | IDENTIFIER
-| FLOAT
+| function_call
 ;
-if_stmt:
-	IF LP condition RP LB NL stmt_list RB else
-  |  IF LP condition RP LB NL stmt_list RB 
+relational : in_paranthesis relational_operator in_paranthesis
 ;
-else:
- ELSE LB NL stmt_list RB
+relational_operator : LESS_T_OP
+| LT_OR_EQUAL_OP
+| GREATER_T_OP
+| GT_OR_EQUAL_OP
+| AND_OP
+| OR_OP
+| EQUAL_OP
+| NOT_EQUAL_OP                                             
 ;
-condition:
- condition AND comp rel_op comp
-| condition OR comp rel_op comp
-| comp rel_op comp
+not_expression : NOT_OP in_paranthesis
+| NOT_OP LP relational RP
+| NOT_OP function_call
 ;
-comp:
- operate
-| BUILTIN_FUNC
+function_definition : function_header function_body
 ;
-rel_op: EQ_CMP
-| GTEQ_CMP
-| NEQ_CMP
-| LTEQ_CMP
-| LT_CMP
-| GT_CMP
+function_header     : FUNCTION function_signature
 ;
-loop_stmt:
- while_loop
-| for_loop
+function_signature  : function_name LP parameter_list RP    
+| function_name LP RP
 ;
-while_loop:
-WHILE LP condition RP LB NL stmt_list RB
+parameter_list      : parameter_list comma IDENTIFIER 
+| IDENTIFIER     
 ;
-for_loop:
-  FOR LP INT_TYPE IDENTIFIER EQUALS INTEGER SEMICOLON condition SEMICOLON for_asnmt RP LB NL stmt_list RB
-  | FOR LP INT_TYPE IDENTIFIER EQUALS IDENTIFIER SEMICOLON condition SEMICOLON for_asnmt RP LB NL stmt_list RB
+function_body       : block | SEMICLN
 ;
-for_asnmt:
- IDENTIFIER EQUALS operate
+block               : LB statement_List RB
+| LB RB
 ;
-print:
- PRINT LP commons RP
+function_call       : function_name LP argument_list RP
+| function_name LP RP    
 ;
-param_list:
-param
-| param_list COMMA param
+function_name       : IDENTIFIER 
+| builtin_function_id
+;                   
+input_statement : INPUT_CALL IN_OP IDENTIFIER
 ;
-param:
-|type IDENTIFIER
+output_statement : OUTPUT_CALL OUT_OP expression
 ;
-switch: SWITCH SRB BOOLEAN SLB
+loop_statement : while
+| for
 ;
-return: RETURN | RETURN commons
+while : WHILE_LOOP LP expression RP LB statement_List RB
+| WHILE_LOOP LP function_call RP LB RB
+| WHILE_LOOP LP expression RP LB RB
 ;
-url:
- CONNECT URL
-| CONNECT IDENTIFIER
-| commons SEND URL
-| commons SEND IDENTIFIER
-| IDENTIFIER RECEIVE URL
-| IDENTIFIER RECEIVE IDENTIFIER
+for : FOR_LOOP LP assignment_statement SEMICLN expression SEMICLN assignment_statement RP LB statement_List RB
+| FOR_LOOP LP assignment_statement SEMICLN expression SEMICLN assignment_statement RP LB RB
 ;
-type: INT_TYPE | FLT_TYPE | STR_TYPE | BOOL_TYPE ;
-cmnt:
- COMMENT
- ;
-func_declr: INT_TYPE IDENTIFIER LP param_list RP LB NL stmt_list RB
-| BOOL_TYPE IDENTIFIER LP param_list RP LB stmt_list RB
-| FLT_TYPE IDENTIFIER LP param_list RP LB stmt_list RB
-| STR_TYPE IDENTIFIER LP param_list RP LB stmt_list RB
-| VOID IDENTIFIER LP param_list RP LB stmt_list RB
+line_comment : SINGLE_LINE_COMMENT
+;
+block_comment : MULTILINE_COMMENT  
 ;
 %%
 #include "lex.yy.c"
