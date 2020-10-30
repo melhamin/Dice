@@ -1,0 +1,114 @@
+a < 15;
+
+var a = 10;
+// a = a + 1;
+var maxAltitude = 100;
+
+/*
+for(var x = 0; x < 10; x = x + 1) {
+
+};
+*/
+
+for() {
+    
+}
+
+
+function increaseAltitudeWithAcceleration(){
+    var currentAlt = get_altitude();    
+};
+1 + 5;
+takeoff();
+
+while ( get_altitude() != maxAltitude){
+    increaseAltitudeWithAcceleration();
+};
+
+if (get_temperature() == 40 ) {
+    flip_right();
+} else {
+    flip_back();
+};
+
+while (get_time() < 12) {
+    hover();
+};
+
+land();
+
+
+
+
+var altitude = get_altitude();
+var currentTime = get_time();
+var password = 1111;
+
+print << connect();
+
+input >> x;
+
+takeoff();
+
+
+if( altitude > 100 ) {
+	video_on();
+	for ( var counter = altitude ; counter  > 10; counter = counter - 1){
+		go_down ( 20 ); 
+	};
+}
+else
+{
+	if( currentTime > 100) {
+		video_off();
+		hover();
+	}
+	else
+	{
+		take_pic();
+		hover();
+	};
+};
+
+
+if( get_battery() <= 10 )
+{
+	land();
+};
+
+var temperature = get_temperature();
+var totalDistance = 200;
+var speed = 40;
+
+connect();
+takeoff();
+
+for( var distance = 0; distance != totalDistance; distance = distance + 1 ) 
+{
+	if( distance < 50){
+		flip_left();
+	}else{
+		if( distance < 100){
+			flip_front();
+		}else{
+			if( distance < 150){
+				flip_back();
+			}else{
+				flip_right();
+			};	
+		};
+	};
+	go_forward( speed);
+	
+	if( get_acceleration() < 5){
+		speed =               speed +               1;
+	};
+	
+	
+	if( temperature           >            80 )      { 
+		land();
+		emergency_stop();
+	};
+};
+
+land();

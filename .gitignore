@@ -4,3 +4,4 @@ work/*.out
 work/*.class
 work/*.cpp
 work/*.java
+work/*.output
