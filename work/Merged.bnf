@@ -2,8 +2,9 @@
 // Non-terminal token that shows our program consists of statements.
 <Program> ::= <statement_List>
 // Non-terminal token that shows our statements can be one or more than one. 
-<statement_List> ::= <statement>
-                   | <statement_List> ; <statement>
+<statement_List> ::= <statement> <semicolon>
+                   | <statement> <semicolon> <statement_List>
+                   | <line_comment> ; <statement>|
 // Non-terminal token that shows our statement can be declaration, assignment, function call, condition or loop statement.
 <statement> ::= <declaration_statement> 
               | <assignment_statement>

@@ -45,7 +45,6 @@ statement: declaration_statement
 | function_definition
 | input_statement
 | output_statement
-| block_comment
 | expression
 ;
 declaration_statement: VARIABLE IDENTIFIER
