@@ -60,7 +60,8 @@ for( var distance = 0; distance != totalDistance; distance = distance + 1 )
 	if( distance < 50){
 		flip_left();
 	}else{
-		if( distance < 100){
+		//NOT CHECK
+		if( !(distance < 100)){
 			flip_front();
 		}else{
 			if( distance < 150){
