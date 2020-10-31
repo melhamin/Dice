@@ -161,7 +161,7 @@ block_comment: MULTILINE_COMMENT
 #include "lex.yy.c"
 int yyerror( char *s ) { 
     printf("\nError on line: %d\n Invalid Program! \n", 1 + lineno); 
-
+    return -1;
 }
 int main() {
     return yyparse();   
