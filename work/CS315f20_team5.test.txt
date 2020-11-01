@@ -1,4 +1,4 @@
-set_wifi(TelloWifiName, pass1234); 
+set_wifi(TelloWifiName, pass1234);
 connect();
 takeoff();
 
@@ -6,6 +6,7 @@ takeoff();
 	this is acceleration	
 	a multiline comment
 */
+//TODO CHECK MLINES COMMENTS
 
 var userName; 
 print << PleaseEnterYourName;
@@ -30,7 +31,7 @@ function increaseAcceleration(){
 		speed = speed + currentAccelaration;
 		set_speed(speed);
 	};  
-}
+};
 
 //Function Call
 increaseAcceleration();
@@ -93,11 +94,6 @@ for( var distance = 0; distance != totalDistance; distance = distance + 1 )
 // variable declaration test
 a = 5*2+5-10-(10/2);
 
-//TODO CHECK MLINES COMMENTS
-/*
-Block Comment Test
-Helo
-*/
 
 land();
 video_off();
