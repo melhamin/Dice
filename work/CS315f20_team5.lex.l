@@ -17,8 +17,6 @@ else return(ELSE);
 [{] return(LB);
 [}] return(RB);
 [;] return(SEMICLN);
-"//".*{nl} return(LINE_COMMENT);                           
-[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] return(MULTILINE_COMMENT);
 [=] return(ASGNMNT_OP);                                       
 [.] return(DOT);
 [\"] return(STRING_IDNT);
@@ -76,10 +74,22 @@ get_inclination return(GET_INCLINATION);
 get_time return(GET_TIME);
 get_battery return(GET_BATTERY);
 connect return(CONNECT);
-
-
 {identifier} return(IDENTIFIER);
 {nl} { extern int lineno; lineno++; }
+"//".*{nl} {
+    extern int lineno; lineno++;
+    return(LINE_COMMENT);                           
+}
+[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] {
+    for(int i=0;yytext[i];i++)  
+    {
+    	if(yytext[i]=='\n')
+    	{        
+        extern int lineno; lineno++;
+		}
+ 	}
+    return(MULTILINE_COMMENT);
+}
 %%
 int yywrap() { 
     printf("\nValid Program!\n");

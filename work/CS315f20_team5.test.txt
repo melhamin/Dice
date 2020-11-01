@@ -2,6 +2,11 @@ set_wifi(TelloWifiName, pass1234);
 connect();
 takeoff();
 
+/*
+	this is acceleration	
+	a multiline comment
+*/
+
 var userName; 
 print << PleaseEnterYourName;
 input >> userName;
@@ -25,7 +30,7 @@ function increaseAcceleration(){
 		speed = speed + currentAccelaration;
 		set_speed(speed);
 	};  
-};
+}
 
 //Function Call
 increaseAcceleration();

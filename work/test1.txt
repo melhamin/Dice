@@ -1,6 +1,10 @@
 connect();
 
-// Variable declaration
+/* Variable declaration
+another comment
+sdafjkd 
+afjld
+*/
 var maxAltitude = 100;
 
 // Functions declarations
